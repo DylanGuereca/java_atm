@@ -7,6 +7,7 @@ package bo.edu.ucb.est.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 /**
  *
  * @author ecampohermoso
@@ -36,13 +37,29 @@ public class Banco {
         clientes.add(cliente);
     }
     
-    public Cliente buscarClientePorCodigo(String codigoCliente, String pin) {
-        for ( int i = 0; i < clientes.size(); i++) {
-            Cliente cli = clientes.get(i); // Sacando elemento por elemento
-            if (cli.getCodigoCliente().equals(codigoCliente) && cli.getPinSeguridad().equals(pin)) {
-                return cli;
+    
+    public void buscarClientePorCodigo() {
+        Scanner Scanner = new Scanner (System.in);
+        int cont=0;
+        String codcliente;
+        String pincliente;
+        do{
+            System.out.println("Ingrese su código de cliente");
+            codcliente = Scanner.nextLine ();
+            System.out.println("Ingrese su pin");
+            pincliente = Scanner.nextLine ();
+            for ( int i = 0; i < clientes.size(); i++) {
+                Cliente cli = clientes.get(i); // Sacando elemento por elemento
+                if (cli.getCodigoCliente().equals(codcliente) && cli.getPinSeguridad().equals(pincliente)) {
+                    System.out.print("Bienvenido Señor(a) "+cli.getNombre());
+                    System.out.println("\n");
+                    Cajero usuario = new Cajero(cli);
+                    cont =1;
+                }
             }
-        }
-        return null;
+            if(cont==0){
+                System.out.println("Código o pin incorrectos, por favor vuelva a intentar");
+            }
+        }while(cont==0);
     }
 }

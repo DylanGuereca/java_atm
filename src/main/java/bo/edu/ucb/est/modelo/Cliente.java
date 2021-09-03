@@ -60,6 +60,14 @@ public class Cliente {
         this.cuentas = cuentas;
     }
     
-    
-    
+    public Cuenta escogerCuenta(int ncuenta){
+        
+        for(int i = 0; i < cuentas.size(); i++) {
+            Cuenta cu = cuentas.get(i);
+            if(ncuenta == (i+1)){
+                return cu;
+            }
+        }
+        return null;
+    }
 }
